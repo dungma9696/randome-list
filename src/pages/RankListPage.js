@@ -22,23 +22,12 @@ function RankListPage() {
         dataPositions = getPosition();
 
         // getPosition();
-        const timer = () => {
-            setTimeout(() => {
-                sortUsers();
-            }, 4000);
-            setTimeout(() => {
-                sortUsers();
-            }, 4000);
-            setTimeout(() => {
-                sortUsers();
-            }, 4000);
-            setTimeout(() => {
-                sortUsers();
-            }, 8000);
+        const timer =()=>{
+            setInterval(sortUsers, 3000)
         }
         // test()
         timer();
-        return () => clearTimeout(timer);
+        return () => clearInterval(timer);
     }, []);
 
     const getPosition = () => {
@@ -150,7 +139,7 @@ function RankListPage() {
             if (topNew > topOld) {
                 offset = Math.min(timeTransformRation * elapsed, topNew - topOld);
                 x = KC;
-                element.style.transform = 'translateY(' + 0 + 'px)';
+                element.style.transform = 'translateY(' + offset + 'px)';
 
             } else {
                 const x1 = timeTransformRation * elapsed;
@@ -158,7 +147,7 @@ function RankListPage() {
                 x = -1 * KC;
                 console.log('X1, X2', x1, x2);
                 offset = Math.min(timeTransformRation * elapsed, topOld -  topNew);
-                element.style.transform = 'translateY(-' + 0 + 'px)';
+                element.style.transform = 'translateY(-' + offset + 'px)';
                 console.log('offset - am', offset, KC);
             }
             // animationTransform(element, offset);
